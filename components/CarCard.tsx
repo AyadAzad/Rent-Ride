@@ -2,7 +2,7 @@
 import Image from "next/image";
 import {useState} from "react";
 import {CarProps} from "@/types";
-import {calculateCarRent} from "@/utils";
+import {calculateCarRent, generateCarImageUrl} from "@/utils";
 import {CustomButton} from "@/components/index";
 import {CarDetails} from "@/components/index";
 interface CarCardProps {
@@ -32,7 +32,7 @@ const CarCard = ({car}: CarCardProps) =>{
             </p>
 
             <div className="relative w-full h-40 my-3 object-contain">
-                <Image src="/hero.png" alt="hero" width={200} height={50}/>
+                <Image src={generateCarImageUrl(car)} alt="hero" width={200} height={50}/>
             <div className="relative flex w-full mt-2">
             </div>
                 <div className="flex group-hover:invisible w-full justify-between text-gray-400">
@@ -61,6 +61,8 @@ const CarCard = ({car}: CarCardProps) =>{
                                   containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
                                   textStyles="text-white text-bold"
                                   rightIcon="/right-arrow.svg"
+                                  btnType="button"
+                                  handleClick={() => setIsOpen(true)}
                     />
                 </div>
                 <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
